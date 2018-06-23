@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Cloud Vision Api</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<style>
+<!--
+body {
+	padding-top: 70px;
+}
+
+.navbar-brand {
+	font-size: 24px;
+}
+
+.form-group {
+	margin-bottom: 5px;
+}
+-->
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-push-3 col-md-6">
+				<div class="form-wrap">
+					<div class="text-center">
+						<h1>Cloud Vision API</h1>
+					</div>
+					<br />
+					<form name="form" role="form" th:action="@{/cloudVisionApiRun}" method="post"
+						id="upload" autocomplete="off" enctype="multipart/form-data">
+						<input type="file" name="uploadFile" id="uploadFile"
+							class="form-control" accept=".jpg,.gif,.png,.jfif" />
+						<button id="btn-upload" class="btn btn-primary btn-block">Run</button>
+					</form>
+					<br />
+					<div class="text-center">
+						<h2 th:text="${result}"></h2>
+						<h2 th:text="${result_error}"></h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container2">
+		<div class="row2">
+			<div class="col-xs-24 col-md-push-6 col-md-12">
+				<div class="form-wrap">
+					<form method="post" action="menu">
+						<input type="submit" value="Menu" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/js/jquery-3.2.1.min.js"
+		th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+	<script type="text/javascript">
+	</script>
+</body>
+</html>
