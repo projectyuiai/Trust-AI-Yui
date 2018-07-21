@@ -57,30 +57,14 @@ public class CloudVisionApi {
 
 		// Typeの指定
 		// 色の情報を得たい場合は"IMAGE_PROPERTIES"を使用
-//		String type = "IMAGE_PROPERTIES";
+		String type = "IMAGE_PROPERTIES";
 		// ラベルを得たい場合は"LABEL_DETECTION"を使用
-		String type = "LABEL_DETECTION";
-
+//		String type = "LABEL_DETECTION";
+		
 		// リクエストを送るためのJSONを作成
-		String json = "{  \n" + 
-				"    \"requests\":\n" + 
-				"     [  \n" + 
-				"      {  \n" + 
-				"       \"image\":\n" + 
-				"         {  \n" + 
-				"              \"content\":\"" + base64Image + "\"\n" +
-				"         },  \n" + 
-				"     \"features\":\n" + 
-				"       [  \n" + 
-				"        {  \n" + 
-				"           \"type\":\""+type+"\",  \n" + 
-				"            \"maxResults\":1  \n" + 
-				"        }  \n" + 
-				"       ]  \n" + 
-				"     }  \n" + 
-				"   ]  \n" + 
-				" }";
-
+		ManagementJson MJson = new ManagementJson();
+		String json = MJson.CloudVisionApiJson(base64Image, type, 1);
+		
 		//RequestにJSONを追加
 		StringEntity reqEntity = new StringEntity(json);
 		request.setEntity(reqEntity);
@@ -104,8 +88,8 @@ public class CloudVisionApi {
 		if (type == "LABEL_DETECTION"){
 			result = resultJson.get("responses").get(0).get("labelAnnotations").get(0).get("description").asText();
 		}else if (type == "IMAGE_PROPERTIES"){
-			ManagementColor color = new ManagementColor();
-			color.changeColor(resultJson);
+			CloudVisionApiImageProperties color = new CloudVisionApiImageProperties();
+			result = color.changeColor(resultJson);
 		}
 
 		// Resultに結果をセット
