@@ -1,0 +1,8 @@
+blackFeelings,64,64,64,上品,null
+deepBlueFeelings,64,64,192,活発,null
+greenFeelings,64,192,64,安らぎ,null
+lightBlueFeelings,64,192,192,驚き,null
+redFeelings,192,64,64,生命力,null
+purpleFeelings,192,64,192,高級,null
+yellowFeelings,192,192,64,喜び,null
+grayFeelings,192,192,192,調和,null
