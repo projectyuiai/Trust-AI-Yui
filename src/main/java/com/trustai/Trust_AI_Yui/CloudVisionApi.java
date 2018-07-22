@@ -29,7 +29,7 @@ public class CloudVisionApi {
 	 * @return Object
 	 * @throws Exception
 	 */
-	public Object run(Model model, MultipartFile multipartFile) throws Exception{ 
+	public Object run(Model model, MultipartFile multipartFile, String featureType) throws Exception{ 
 
 		// ファイルが空の場合には画像選択画面に戻る
 		if(multipartFile.isEmpty()){
@@ -54,16 +54,10 @@ public class CloudVisionApi {
 
 		// 画像をBase64に変換
 		String base64Image = Base64.getEncoder().encodeToString(multipartFile.getBytes());
-
-		// Typeの指定
-		// 色の情報を得たい場合は"IMAGE_PROPERTIES"を使用
-		String type = "IMAGE_PROPERTIES";
-		// ラベルを得たい場合は"LABEL_DETECTION"を使用
-//		String type = "LABEL_DETECTION";
 		
 		// リクエストを送るためのJSONを作成
 		ManagementJson MJson = new ManagementJson();
-		String json = MJson.CloudVisionApiJson(base64Image, type, 1);
+		String json = MJson.CloudVisionApiJson(base64Image, featureType, 1);
 		
 		//RequestにJSONを追加
 		StringEntity reqEntity = new StringEntity(json);
@@ -81,13 +75,13 @@ public class CloudVisionApi {
 		ObjectMapper objectMapper = new ObjectMapper();
 		JsonNode resultJson = objectMapper.readTree(EntityUtils.toString(entity));
 
-		// JSONから値を取り出す
+		// Resultの初期化
 		String result = null;
-
-		// 分岐
-		if (type == "LABEL_DETECTION"){
+		
+		// 画像認識のタイプで分岐（JSONから値を取り出す）
+		if (featureType.equals("LABEL_DETECTION")){
 			result = resultJson.get("responses").get(0).get("labelAnnotations").get(0).get("description").asText();
-		}else if (type == "IMAGE_PROPERTIES"){
+		}else if (featureType.equals("IMAGE_PROPERTIES")){
 			CloudVisionApiImageProperties color = new CloudVisionApiImageProperties();
 			result = color.changeColor(resultJson);
 		}
