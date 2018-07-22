@@ -46,9 +46,10 @@ public class TrustAiYuiController {
 	 */
 	@RequestMapping("cloudVisionApiRun")
 	public Object cloudVisionApiRun(Model model,
-			@RequestParam("uploadFile") MultipartFile multipartFile) throws Exception{ 
+			@RequestParam("uploadFile") MultipartFile multipartFile ,@RequestParam("featureType")String featureType) throws Exception{
+
 		CloudVisionApi VisionApi = new CloudVisionApi();
-		VisionApi.run(model, multipartFile);
+		VisionApi.run(model, multipartFile,featureType);
 		return "cloudVisionApiForm";
 	}
 
