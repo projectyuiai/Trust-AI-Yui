@@ -84,6 +84,9 @@ public class CloudVisionApi {
 		}else if (featureType.equals("IMAGE_PROPERTIES")){
 			CloudVisionApiImageProperties color = new CloudVisionApiImageProperties();
 			result = color.changeColor(resultJson);
+		}else if (featureType.equals("TEXT_DETECTION")){
+			CloudVisionOpticalCharacterRecognition ocr = new CloudVisionOpticalCharacterRecognition();
+			result = ocr.textDetection(resultJson);
 		}
 
 		// Resultに結果をセット
