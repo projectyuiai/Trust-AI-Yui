@@ -8,7 +8,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -63,9 +62,9 @@ public class CloudVisionApi {
 		StringEntity reqEntity = new StringEntity(json);
 		request.setEntity(reqEntity);
 
-		// 実行準備
-		HttpClient httpClient = null;
-		httpClient = HttpClientBuilder.create().build();
+		// 実行準備(プロキシ設定の有無確認)
+		TrustAiYuiClientProxySetting clientProxy = new TrustAiYuiClientProxySetting();
+		HttpClient httpClient = clientProxy.getClientProxy();
 
 		// 実行
 		HttpResponse response = httpClient.execute(request);
