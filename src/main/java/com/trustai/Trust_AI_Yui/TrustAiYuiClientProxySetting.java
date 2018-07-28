@@ -18,7 +18,7 @@ public class TrustAiYuiClientProxySetting {
 	public HttpClient getClientProxy(){
 		
 		// システム環境変数からプロキシの設定を取得
-		// 例：　set http_proxy　=　"proxy.mycompany.co.jp:8080"
+		// C:\> setx http_proxy "http://ユーザ名:パスワード@proxy.example.com:8080"
 		final String httpProxy = System.getenv("http_proxy");
 		
 		// httpClientを初期化
